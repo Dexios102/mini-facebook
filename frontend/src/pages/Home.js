@@ -1,10 +1,10 @@
 import React from 'react';
 import HomeHeader from './HomeHeader';
 
-function LandingPage() {
+function Home() {
   return (
       <HomeHeader />
   );
 }
 
-export default LandingPage;
+export default Home;
