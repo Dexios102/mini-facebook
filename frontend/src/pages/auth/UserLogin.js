@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { setUserToken } from '../../features/authSlice';
 import { getToken, storeToken } from '../../services/LocalStorageService';
 import { useLoginUserMutation } from '../../services/userAuthApi';
+import { Alert} from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -116,6 +117,7 @@ const theme = createTheme();
             >
               Sign In
             </Button>
+            {server_error.non_field_errors ? <Alert severity='error'>{server_error.non_field_errors[0]}</Alert> : ''}
             <Grid container>
               <Grid item xs>
                 <Link href="/sendpasswordresetemail" variant="body2">
