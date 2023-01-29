@@ -46,5 +46,5 @@ body{
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('../../images/home.svg');
+    background-image: url('../images/home.svg');
 }

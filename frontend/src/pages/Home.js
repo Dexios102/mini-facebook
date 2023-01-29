@@ -1,11 +1,9 @@
 import React from 'react';
-import HomeHeader from './auth/HomeHeader';
+import HomeHeader from './HomeHeader';
 
 function LandingPage() {
   return (
-    <div className="LandingPage">
       <HomeHeader />
-    </div>
   );
 }
 
