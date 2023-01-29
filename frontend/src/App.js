@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import LoginReg from "./pages/auth/LoginReg";
+import UserLogin from "./pages/auth/UserLogin";
+import Registration from "./pages/auth/Registration";
 import ResetPassword from "./pages/auth/ResetPassword";
 import SendPasswordResetEmail from "./pages/auth/SendPasswordResetEmail";
 import Contact from "./pages/Contact";
@@ -16,7 +17,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="login" element={!access_token ? <LoginReg /> : <Navigate to="/dashboard" />} />
+            <Route path="login" element={!access_token ? <UserLogin /> : <Navigate to="/dashboard" />} />
+            <Route path="register" element={!access_token ? <Registration /> : <Navigate to="/login" />} />
             <Route path="sendpasswordresetemail" element={<SendPasswordResetEmail />} />
             <Route path="api/user/reset/:id/:token" element={<ResetPassword />} />
           </Route>
