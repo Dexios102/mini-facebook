@@ -12,13 +12,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Alert} from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRegisterUserMutation } from '../../services/userAuthApi'
+import { storeToken } from '../../services/LocalStorageService';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        I-Post Social Media
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,15 +33,33 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
+const Registration = () => {
+  const [server_error, setServerError] = useState({})
+  const navigate = useNavigate();
+  const [registerUser] = useRegisterUserMutation()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const actualData = {
+      name: data.get('name'),
       email: data.get('email'),
       password: data.get('password'),
-    });
-  };
+      password2: data.get('password2'),
+      tc: data.get('tc'),
+    }
+    const res = await registerUser(actualData)
+    if (res.error) {
+      // console.log(typeof (res.error.data.errors))
+      // console.log(res.error.data.errors)
+      setServerError(res.error.data.errors)
+    }
+    if (res.data) {
+      console.log(typeof (res.data))
+      console.log(res.data)
+      storeToken(res.data.token)
+      navigate('/dashboard')
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,28 +79,19 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit} id='registration-form' sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  autoComplete="name"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="name"
+                  label="Full Name"
                   autoFocus
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
+                {server_error.name ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.name[0]}</Typography> : ""}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -88,6 +102,7 @@ export default function SignUp() {
                   name="email"
                   autoComplete="email"
                 />
+                {server_error.email ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.email[0]}</Typography> : ""}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -99,12 +114,26 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
+                {server_error.password ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.password[0]}</Typography> : ""}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password2"
+                  label="Confirm Password"
+                  type="password"
+                  id="password2"
+                  autoComplete="password2"
+                />
+                {server_error.password2 ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.password2[0]}</Typography> : ""}
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  control={<Checkbox value={true} color="primary" name="tc" id="tc"/>}
+                  label="Agree on Terms and Condition"
                 />
+                {server_error.tc ? <span style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.tc[0]}</span> : ""}
               </Grid>
             </Grid>
             <Button
@@ -115,9 +144,10 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            {server_error.non_field_errors ? <Alert severity='error'>{server_error.non_field_errors[0]}</Alert> : ''}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -129,3 +159,4 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
+export default Registration;
