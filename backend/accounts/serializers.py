@@ -5,6 +5,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from accounts.utils import Util
 
+
 class UserRegistrationSerializer(serializers.ModelSerializer):
   # We are writing this becoz we need confirm password field in our Registratin Request
   password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
@@ -24,7 +25,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     return attrs
 
   def create(self, validate_data):
-    return User.objects.create_user(**validate_data)
+    User.objects.create_user(**validate_data)
+    
 
 class UserLoginSerializer(serializers.ModelSerializer):
   email = serializers.EmailField(max_length=255)
