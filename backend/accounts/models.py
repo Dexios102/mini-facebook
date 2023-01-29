@@ -1,3 +1,6 @@
+import uuid
+from django.core.mail import send_mail
+from django.shortcuts import render, get_object_or_404
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
 
@@ -47,6 +50,8 @@ class User(AbstractBaseUser):
   is_admin = models.BooleanField(default=False)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
+  is_email_verified = models.BooleanField(default=False)
+  email_verification_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
   objects = UserManager()
 
@@ -72,6 +77,18 @@ class User(AbstractBaseUser):
       # Simplest possible answer: All admins are staff
       return self.is_admin
 
+  def send_verification_email(self):
+      subject = 'Verify your email address'
+      message = 'Click the link to verify your email: http://example.com/verify-email/{}'.format(self.email_verification_uuid)
+      from_email = 'noreply@example.com'
+      recipient_list = [self.email]
+      send_mail(subject, message, from_email, recipient_list)
+
+  def verify_email(request, email_verification_uuid):
+     user = get_object_or_404(User, email_verification_uuid=email_verification_uuid)
+     user.is_email_verified = True
+     user.save()
+     return render(request, 'verify_email_success.html')  
 
 
 
