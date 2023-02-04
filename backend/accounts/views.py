@@ -1,70 +1,71 @@
+from rest_framework import generics, views, parsers
+from rest_framework.decorators import api_view,parser_classes
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from accounts.serializers import SendPasswordResetEmailSerializer, UserChangePasswordSerializer, UserLoginSerializer, UserPasswordResetSerializer, UserProfileSerializer, UserRegistrationSerializer
-from django.contrib.auth import authenticate
-from accounts.renderers import UserRenderer
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
+from .serializers import UserSerializer,UserUpdateSerializer
+from django.contrib.auth import get_user_model
+from posts.models import Post
+from posts.serializers import PostSerializer
 
-# Generate Token Manually
-def get_tokens_for_user(user):
-  refresh = RefreshToken.for_user(user)
-  return {
-      'refresh': str(refresh),
-      'access': str(refresh.access_token),
-  }
+User = get_user_model()
 
-class UserRegistrationView(APIView):
-  renderer_classes = [UserRenderer]
-  def post(self, request, format=None):
-    serializer = UserRegistrationSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    user = serializer.save()
-    token = get_tokens_for_user(user)
-    return Response({'token':token, 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
+class UsersListAPI(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-class UserLoginView(APIView):
-  renderer_classes = [UserRenderer]
-  def post(self, request, format=None):
-    serializer = UserLoginSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    email = serializer.data.get('email')
-    password = serializer.data.get('password')
-    user = authenticate(email=email, password=password)
-    if user is not None:
-      token = get_tokens_for_user(user)
-      return Response({'token':token, 'msg':'Login Success'}, status=status.HTTP_200_OK)
+class ProfileAPI(views.APIView):
+    def get_current_user(self):
+        user_serializer = UserSerializer(self.request.user, context={'request': self.request})
+        return user_serializer.data
+    
+    def get_user_posts(self):
+        user_posts = Post.objects.filter(author=self.request.user)
+        return PostSerializer(user_posts, many=True, context={'request': self.request}).data
+
+    def get(self, request, *args, **kwargs):
+        return Response({
+        'user': self.get_current_user(),
+        'posts': self.get_user_posts()
+    })
+
+@api_view(['GET'])
+def UserDetailAPI(request, pk):
+        user = User.objects.get(pk=pk)
+        user_serializer = UserSerializer(user, context={'request': request}).data
+        user_posts = Post.objects.filter(author=user)
+        post_serializer = PostSerializer(user_posts, many=True, context={'request': request}).data
+        return Response({
+            'user': user_serializer,
+            'posts': post_serializer
+        })
+
+@api_view(['GET','PATCH'])
+@parser_classes([parsers.MultiPartParser, parsers.FormParser])
+def UpdateUserAPI(request):
+    serializer = UserUpdateSerializer(request.user)
+    if request.method == "PATCH":
+        serializer = UserUpdateSerializer(request.user, request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def follow_user(request, pk):
+    user = User.objects.get(pk=pk)
+    current_user = request.user
+    if current_user in user.followers.all():
+        user.followers.remove(current_user)
+        return Response({"data":"Unfollowed"})
     else:
-      return Response({'errors':{'non_field_errors':['Email or Password is not Valid']}}, status=status.HTTP_404_NOT_FOUND)
+        user.followers.add(current_user)
+        return Response({"data":"Followed"})
 
-class UserProfileView(APIView):
-  renderer_classes = [UserRenderer]
-  permission_classes = [IsAuthenticated]
-  def get(self, request, format=None):
-    serializer = UserProfileSerializer(request.user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+class UserSearch(generics.ListAPIView):
+    serializer_class = UserSerializer
 
-class UserChangePasswordView(APIView):
-  renderer_classes = [UserRenderer]
-  permission_classes = [IsAuthenticated]
-  def post(self, request, format=None):
-    serializer = UserChangePasswordSerializer(data=request.data, context={'user':request.user})
-    serializer.is_valid(raise_exception=True)
-    return Response({'msg':'Password Changed Successfully'}, status=status.HTTP_200_OK)
-
-class SendPasswordResetEmailView(APIView):
-  renderer_classes = [UserRenderer]
-  def post(self, request, format=None):
-    serializer = SendPasswordResetEmailSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    return Response({'msg':'Password Reset link send. Please check your Email'}, status=status.HTTP_200_OK)
-
-class UserPasswordResetView(APIView):
-  renderer_classes = [UserRenderer]
-  def post(self, request, uid, token, format=None):
-    serializer = UserPasswordResetSerializer(data=request.data, context={'uid':uid, 'token':token})
-    serializer.is_valid(raise_exception=True)
-    return Response({'msg':'Password Reset Successfully'}, status=status.HTTP_200_OK)
-
-
+    def get_queryset(self):
+        queryset = User.objects.all()
+        search_query = self.request.query_params.get('q',None)
+        if search_query:
+            queryset = User.objects.filter(username__icontains=search_query)
+        return queryset
