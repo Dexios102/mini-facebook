@@ -68,7 +68,7 @@ const PostDetail = () => {
                                             value={commentBody} />
                                     </div>
                                     <button className="btn__primary" id="comment_button"
-                                        onClick={handleComment}>Comment
+                                        onClick={handleComment}>COMMENT
                                     </button>
                                     {/* show all comments of post */}
                                     {comments.map((comment) => {

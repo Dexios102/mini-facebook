@@ -81,7 +81,7 @@ const EditPost = () => {
                           alt="pic" className="img-fluid mt-1" id="Edit_Image"
                           style={{ height: "20em", width: "100%" }} />}
                         <button type="submit" className="btn__primary mt-2" id="post__button">
-                          {updating ? "Editing..." : "Save"}
+                          {updating ? "Editing..." : "SAVE"}
                         </button>
                       </div>
                     </form>

@@ -99,6 +99,24 @@ font-size: 14px;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+#search__input {
+  width:230%;
+  height: 42px;
+border: 1px solid rgb(193, 193, 193) !important;
+font-weight:500;
+font-size: 14px;
+}
+
+#search__post {
+  margin-top: 30px;
+}
+
+#search__label {
+  margin-top: 26px;
+  font-size: 16px;
+  font-family: 'Source Sans Open', sans-serif;
+  margin-left: 5px;
+}
 #comment_button {
   background-color: #006400;
   font-family: "Source Sans Open", sans-serif;
@@ -109,6 +127,52 @@ font-size: 14px;
   margin-bottom: 5px;
   margin-top: 10px;
   width: 100%;
+}
+
+.loginpage_text {
+  font-family: 'Source Open Sans', sans-serif;
+  font-weight: bold;
+  padding: 15px;
+  font-size: 24px;
+}
+#logoutpage_button {
+  background-color: #006400;
+  font-family: "Source Sans Open", sans-serif;
+  font-weight: bold;
+  border-radius: 5px !important;
+  padding: 10px !important;
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+#logoutpage_button:hover {
+  color: white !important;
+}
+
+#Create_Account {
+  background-color: rgb(40, 40, 179);
+  font-family: "Source Sans Open", sans-serif;
+  border-radius: 5px !important;
+  padding: 10px !important;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  width: 50%;
+  color: white !important;
+  margin-left: 24%;
+  text-align: center;
+}
+#logoutpage_text {
+  font-size: 24px;
+  font-family: 'Source Sans Open', sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: -5px;
+  margin-top: 30%;
+  color: #5e5e5e; 
 }
 .btn__primary {
 border: none;
@@ -271,10 +335,29 @@ border-radius: 20px;
   color: #8c8c8c;
 }
 
+#Logout__Message {
+  font-size: 25px;
+  font-family: 'Source Sans Open', sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: -5px;
+  color: #ffffff;
+  background-color: #929292;
+  border-radius: 20px;
+}
+
+#Backto_Login {
+  width: 50%;
+}
+
+#logout_page {
+  width: 50%;
+  text-align: center;
+}
 #post_heart {
   color: red !important;
   font-size: 24px;
-  margin-top: -5px;
+  margin-top: 0px;
 }
 
 #post_comment {
@@ -286,15 +369,20 @@ border-radius: 20px;
 #post_edit {
   color: #006400 !important;
   font-size: 23px;
-  margin-top: -9px;
+  margin-top: -8px;
 }
 
 #post_delete {
-  color: #006400 !important;
+  color: red !important;
   font-size: 23px;
   margin-top: -5px;
 }
 
+#search__icon {
+  color: white !important;
+  font-size: 18px;
+  
+}
 #edit__page {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
@@ -302,6 +390,20 @@ border-radius: 20px;
 
 #edit__content {
   padding: 15px;
+}
+
+#login__content {
+  margin-top: 15%;
+  padding: 15px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#login__input {
+  font-family: 'Source Open Sans', sans-serif;
+}
+
+#login__input:active {
+ box-shadow: 1px solid #006400 !important;
 }
 
 .Edit {
@@ -341,6 +443,17 @@ border-radius: 20px;
   margin-bottom: 5px;
 }
 
+#search__button {
+  background-color: #006400;
+  font-family: "Source Sans Open", sans-serif;
+  border-radius: 5px !important;
+  padding: 10px !important;
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-left: 53%;
+}
+
+
 #User_Name {
   font-family: 'Source Sans Open', sans-serif;
   font-size: 20px;
@@ -358,4 +471,9 @@ border-radius: 20px;
   width: 100px;
   margin-left: -10%;
   margin-right: 3%;
+}
+
+#Post_Links {
+  font-family: 'Source Sans Open', sans-serif !important;
+  font-size: 16px !important;
 }
