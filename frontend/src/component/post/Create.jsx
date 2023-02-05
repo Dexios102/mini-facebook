@@ -1,31 +1,30 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
-import { useState } from 'react';
+import React,{useContext} from 'react';
+import {useState} from 'react';
 import UploadImage from '../../assets/upload.png';
 import UserImage from '../../assets/user.png';
-import { UserContext } from '../../context/UserContext'
-import { createPost } from './actions';
+import {UserContext} from '../../context/UserContext'
+import {createPost} from './actions';
 import FormData from 'form-data';
-import { useNavigate } from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 // post create bar
 const CreatePost = (props) => {
-    const [caption, setCaption] = useState('');
-    const [image, setImage] = useState({ preview: null, raw: null });
+    const [caption,setCaption] = useState('');
+    const [image,setImage] = useState({preview:null,raw:null});
 
-    const [loading, setLoading] = useState(false);
+    const [loading,setLoading] = useState(false);
 
-    const { user } = useContext(UserContext);
+    const {user} = useContext(UserContext);
     let authorID = user.data.user.id;
 
     const navigate = useNavigate();
 
     // handle image selection from image field
     const handleImageUpload = (e) => {
-        if (e.target.files.length) {
+        if(e.target.files.length) {
             let img = e.target.files[0];
             setImage({
-                preview: URL.createObjectURL(img),
-                raw: img
+                preview:URL.createObjectURL(img),
+                raw:img
             })
         }
     }
@@ -34,12 +33,12 @@ const CreatePost = (props) => {
     const postData = async () => {
         setLoading(true);
         let payload = new FormData();
-        payload.append("body", caption);
-        image.raw && payload.append("image", image.raw);
+        payload.append("body",caption);
+        image.raw && payload.append("image",image.raw);
         let newPost = await createPost(payload);
-        if (newPost) {
+        if(newPost) {
             setLoading(false);
-            navigate('/post/' + newPost.id)
+            navigate('/post/'+newPost.id)
         } else {
             setLoading(false)
         }
@@ -47,19 +46,33 @@ const CreatePost = (props) => {
 
     return (
         <div className="create">
-            <div className="create__post">
-                <img src={props.avatar ? props.avatar : UserImage} alt="avtar" className="img-fluid me-auto" style={{ width: "2.7em", height: "2.7em", borderRadius: "50%" }} />
+        <div className="create__post">
+        <img src={props.avatar ? props.avatar : UserImage} alt="avtar" className="img-fluid me-auto" style={{width:"2.7em",height:"2.7em",borderRadius:"50%"}} />
 
-                <textarea className="form-control" placeholder="Post something on your mind..." id="create__input" onChange={e => setCaption(e.target.value)} />
+        <textarea className="form-control" placeholder="Create Post" id="create__input" onChange={e=>setCaption(e.target.value)} />
+    
+        <label htmlFor="upload__image">
+        <img src={UploadImage} alt="upload" style={{height:"2em",width:"2em",marginLeft:"0.3em"}} />
+        </label>
+        
+        <input type="file" accept="image/*" id="upload__image"  style={{display:"none"}} onChange={handleImageUpload} />
 
-                <label htmlFor="upload__image">
-                    <img src={UploadImage} alt="upload" style={{ height: "2em", width: "2em", marginLeft: "0.3em" }} />
-                </label>
+        </div>
 
-                <input type="file" accept="image/*" id="upload__image" style={{ display: "none" }} onChange={handleImageUpload} />
+        {/* show the preview image if image is selected */}
+        { image.preview &&  
+            <div style={{position:"relative"}}>
+            {/* clear the selected image */}
+            <i className="fas fa-trash-alt text-danger"
+            style={{position:"absolute",top:"2%",right:"1%",cursor:"pointer"}}
+            onClick={()=>setImage({preview:null,raw:null})}
+            />
 
-            </div>
+            <img src={image.preview} className="img-fluid mt-1 dummy__img" alt="preview" /> 
+            </div> 
+        }
 
+<<<<<<< HEAD
             {/* show the preview image if image is selected */}
             {image.preview &&
                 <div style={{ position: "relative" }}>
@@ -75,6 +88,10 @@ const CreatePost = (props) => {
 
             <button className="btn__primary" id="post__button" onClick={postData}>
                 {loading ? "Posting" : "Post"} </button>
+=======
+        <button className="btn__primary" id="post__button" onClick={postData}>
+        {loading ? "Posting" : "Post"} <i className="fas fa-upload ms-1"></i> </button>
+>>>>>>> 8ca4dec8d1ad631b696d03f5ae0f86150587c0f5
         </div>
     )
 }

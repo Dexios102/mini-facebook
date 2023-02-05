@@ -14,27 +14,24 @@ const EditPost = () => {
     const [updating,setUpdating] = useState(false); // updating post state
 
     // fetch post on load
-    useEffect(() => {
-        const fetchPost = async () => {
-          setLoading(true);
-          let post_ = await getEditingPost(postId);
-          if (post_) {
-            if (post_ !== {}) {
-              setPost(post_);
-              if (post !== {}) {
-                setLoading(false);
-                console.log(post);
-              }
+    useEffect(async()=>{
+        setLoading(true)
+        let post_ = await getEditingPost(postId);
+        if(post_) {
+            if(post_ !== {}) {
+                setPost(post_);
+                if(post!=={}) {
+                    setLoading(false)
+                    console.log(post)
+                }
             }
-          } else {
-            setPost(404);
-            setLoading(false);
-          }
-        };
-      
-        fetchPost();
-      }, [post, postId]);
-      
+        } else {
+            // if response is null its 404 so set post to 404 and show Restricted msg
+            setPost(404)
+            setLoading(false)
+        }
+        
+    },[])
 
     // formik to handle update post form 
     let formik = useFormik({

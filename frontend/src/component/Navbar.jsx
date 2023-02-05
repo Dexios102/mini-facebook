@@ -1,23 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import Logo from '../assets/IPOST LOGO.png';
-import { useFormik } from 'formik'
+/* import { useFormik } from 'formik' */
 
 const Navbar = () => {
     let { user } = useContext(UserContext); // authenticated user
 
-    let navigate = useNavigate();
+    /* let navigate = useNavigate(); */
 
-    let formik = useFormik({
+    /* let formik = useFormik({
         initialValues: {
             query: ""
         },
         onSubmit: (values) => {
             navigate(`/search?q=${values.query}`)
         }
-    })
+    }) */
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light sticky-top" style={{ background: "	#2E8B57" }}>
