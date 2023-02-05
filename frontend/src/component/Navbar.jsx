@@ -32,14 +32,6 @@ const Navbar = () => {
 
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
 
-                    <div className="ms-auto">
-                        <form onSubmit={formik.handleSubmit} className="d-flex" id="search__box">
-                            <input className="form-control me-2" placeholder="Search..." name="query" type="search" id="searchbar" aria-label="Search" style={{ border: "#006400", background: "#006400" }}
-                                onChange={formik.handleChange} />
-                            <button className="btn btn-sm btn-outline-primary" type="submit" style={{ border: "none" }}> <i className="fas fa-search" id="search_icon" /> </button>
-                        </form>
-                    </div>
-
                     <ul className="ms-auto navbar-nav">
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

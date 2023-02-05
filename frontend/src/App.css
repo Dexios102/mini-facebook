@@ -59,7 +59,9 @@ height: auto;
 background: #fff;
 width: 80%;
 margin: auto;
-padding:0.5em;
+padding: 15px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+border-radius: 10px;
 }
 
 .create__post {
@@ -70,11 +72,17 @@ align-items: center;
 }
 
 #create__input {
-height:2.7em;
+height:5px;
 width:84.5%;
 border:none;
 font-family:Ubuntu;
 font-weight:500;
+}
+
+#create__input::placeholder {
+  color: rgb(117, 117, 117);
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .btn__primary {
@@ -93,8 +101,15 @@ background: #394dbe;
 width:100%;
 margin:0.9em auto;
 margin-bottom: 0;
+background-color: #006400;
+font-family: 'Segoe UI', sans-serif;
+font-weight: bold;
+font-size: 15px;
 }
 
+#post_icon {
+  color: #4ce08e;
+}
 .dummy__img {
   height: 24em;
   width: 100%;
@@ -120,6 +135,34 @@ margin-bottom: 0;
   font-size: 0.8em;
 }
 
+.post__header {
+  padding: 15px;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: 'Segoe UI',  sans-serif;
+}
+
+#avatar {
+  margin-right: 5px;
+}
+.post__body {
+  margin-top: 0px !important;
+  padding: 10px;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.post__action {
+  margin-top: 0px !important;
+  padding: 15px;
+}
+
+.post__card {
+  background-color: white;
+  border: 1px solid 	#F5F5F5;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .post__body p {
   margin: 0.5em 0 0.3em 0;
   font-family: 'Ubuntu';
@@ -167,6 +210,7 @@ margin-bottom: 0;
 
 #sidebar {
   border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #sidebar_link {
@@ -187,4 +231,13 @@ margin-bottom: 0;
 
 #searchbar {
   border-radius: 5px;
+}
+
+.Menu {
+  font-size: 24px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: -5px;
+  color: #8c8c8c;
 }

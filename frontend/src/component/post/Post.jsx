@@ -27,7 +27,7 @@ const Post = (props) => {
     return (
         <div className={deleted ? "post__card deleted" : "post__card"}>
             <div className="post__header">
-                <img src={props.avatar ? props.avatar : UserLogo} alt="" style={{ height: "2em", width: "2em", borderRadius: "50%" }} />
+                <img src={props.avatar ? props.avatar : UserLogo} alt="" id="avatar" style={{ height: "2em", width: "2em", borderRadius: "50%" }} />
                 <Link to={"/user/" + props.userId} className="text-dark ms-1">{props.username}</Link>
             </div>
 
