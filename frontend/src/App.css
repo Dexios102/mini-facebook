@@ -81,12 +81,35 @@ font-weight:500;
 font-size: 14px;
 }
 
+#comment__input {
+width:100%;
+border: 1px solid rgb(193, 193, 193) !important;
+font-weight:500;
+font-size: 14px;
+}
+
+#comment__input::placeholder {
+  color: rgb(117, 117, 117);
+  font-size: 16px;
+}
+
 #create__input::placeholder {
   color: rgb(117, 117, 117);
   font-size: 16px;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+#comment_button {
+  background-color: #006400;
+  font-family: "Source Sans Open", sans-serif;
+  font-weight: bold;
+  border-radius: 5px !important;
+  padding: 10px !important;
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  width: 100%;
+}
 .btn__primary {
 border: none;
 background: #445ef3;
@@ -170,6 +193,7 @@ border-radius: 20px;
 }
 .post__body p {
   margin: 0.5em 0 0.3em 0;
+  margin-top: -10px;
   font-family: 'Ubuntu';
   color: #464545;
   font-size: 0.9em;
@@ -249,8 +273,89 @@ border-radius: 20px;
 
 #post_heart {
   color: red !important;
+  font-size: 24px;
+  margin-top: -5px;
 }
 
 #post_comment {
   color: #006400 !important;
+  font-size: 22px;
+  margin-top: -6px;
+}
+
+#post_edit {
+  color: #006400 !important;
+  font-size: 23px;
+  margin-top: -9px;
+}
+
+#post_delete {
+  color: #006400 !important;
+  font-size: 23px;
+  margin-top: -5px;
+}
+
+#edit__page {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+}
+
+#edit__content {
+  padding: 15px;
+}
+
+.Edit {
+  font-size: 24px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: bold;
+  margin-bottom: -5px;
+  color: #8c8c8c;
+}
+
+.Edit_Caption {
+  font-size: 16px;
+  border-radius: 5px;
+  font-family: 'Source Open Sans', sans-serif;
+  margin-bottom: 10px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#Edit_CaptionText {
+  margin-bottom: 10px;
+}
+
+#Edit_Image {
+  border: 1px solid rgb(192, 192, 192); 
+}
+
+#Edit_Button {
+  margin-top: 25px !important;
+}
+
+#Edit_Profile {
+  background-color: #006400;
+  font-family: "Source Sans Open", sans-serif;
+  border-radius: 5px !important;
+  padding: 10px !important;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+#User_Name {
+  font-family: 'Source Sans Open', sans-serif;
+  font-size: 20px;
+}
+
+.Profile {
+  font-family: 'Source Sans Open', sans-serif;
+  font-size: 16px;
+}
+
+#Profile_Avatar {
+  border: 1px solid rgb(210, 210, 210);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 100px;
+  width: 100px;
+  margin-left: -10%;
+  margin-right: 3%;
 }

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import UserLogo from '../../assets/user.png';
 import { Link } from 'react-router-dom';
+import { BsChatLeft } from "react-icons/bs";
+import { BsPencilSquare } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 
 const Post = (props) => {
     const [liked, setLiked] = useState(false); //like post from List and all
@@ -40,18 +43,17 @@ const Post = (props) => {
 
             <div className="post__action">
                 <span onClick={likePost}>
-                    <i
-                        className={liked ? "fas fa-heart text-primary" : "far fa-heart text-primary"} id="post_heart" />  {totalLikes}
+                    <i className={liked ? "fas fa-heart text-primary" : "far fa-heart text-primary"} id="post_heart" />  {totalLikes}
                 </span>
 
                 <Link to={"/post/" + props.id} className="ms-4">
-                    <i className="far fa-comment text-success" id="post_comment" />
+                    <BsChatLeft id="post_comment" />
                 </Link>
                 {/* show edit btn if showEditBtn is true*/}
                 {
                     props.showEditBtn &&
                     <Link to={"/post/edit/" + props.id} className="ms-4">
-                        <i className="far fa-edit text-warning" />
+                        <BsPencilSquare id="post_edit" />
                     </Link>
                 }
 
@@ -59,7 +61,7 @@ const Post = (props) => {
                 {
                     props.showDeleteBtn &&
                     <span onClick={deletePost} className="ms-4">
-                        <i className="far fa-trash-alt text-danger" />
+                        <BsTrash id="post_delete" />
                     </span>
                 }
             </div>

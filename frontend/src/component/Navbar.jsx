@@ -15,7 +15,7 @@ const Navbar = () => {
             query: ""
         },
         onSubmit: (values) => {
-            navigate(`/search?q=${values.query}`)
+            navigate(/search?q=${values.query})
         }
     }) */
 
@@ -39,6 +39,7 @@ const Navbar = () => {
                             </a>
                             {user.data ?
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
                                     <li><Link className="dropdown-item" to="/logout">Logout</Link></li>
                                 </ul> :
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
