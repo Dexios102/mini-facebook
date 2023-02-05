@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap');
 
 section  {
-background: #f4f8fc;
+background: #F5F5F5;
 min-height: 100vh;
 max-height: max-content;
 }
@@ -12,6 +12,9 @@ section > div {
 
 #main__container {
   margin-top: 3em;
+  background-color: #F5F5F5;
+  padding: 25px;
+  border-radius: 15px;
 }
 
 a {
@@ -19,8 +22,32 @@ a {
 }
 
 #search__box {
-width: auto;
-background: #f0f5fa;
+width: 300px;
+height: 45px;
+border-radius: 0px;
+background: #006400;
+}
+
+#searchbar {
+background: #006400;
+border-radius: 0px;
+color: white;
+font-family: 'Roboto', sans-serif;
+}
+
+#searchbar::placeholder {
+  color: rgb(202, 202, 202);
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#search_icon {
+  color: #3CB371;
+}
+
+#user_icon {
+  color: white;
+  font-size: 28px;
 }
 
 .create {
@@ -136,4 +163,28 @@ margin-bottom: 0;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s 1s, opacity 1s linear;
+}
+
+#sidebar {
+  border-radius: 10px;
+}
+
+#sidebar_link {
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+}
+#sidebar_link:hover {
+  background-color: 	#E8E8E8;
+  border-radius: 0px;
+  width: 100%;
+}
+
+.fas {
+  margin-right: 10px;
+  color: #2E8B57;
+}
+
+#searchbar {
+  border-radius: 5px;
 }
