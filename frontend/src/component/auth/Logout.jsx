@@ -7,7 +7,8 @@ const Logout = ()=> {
     const {logout} = useContext(UserContext);
     useEffect(()=>{
         logout();
-    },[])
+    },[logout])
+    
     return (
         <section>
         <Navbar/>

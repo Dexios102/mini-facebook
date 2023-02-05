@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React,{useContext} from 'react';
 import {useState} from 'react';
 import UploadImage from '../../assets/upload.png';

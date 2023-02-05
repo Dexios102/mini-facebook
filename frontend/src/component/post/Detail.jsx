@@ -8,12 +8,12 @@ import Loader from '../Loader'
 
 const PostDetail = () => {
     const {postId} = useParams();
-    const [loaded,setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(false);
     const [post,setPost] = useState({});
     const [commentBody,setCommentBody] = useState('');
     const [comments,setComments] = useState([]);
 
-    useEffect(async () =>{
+    /* useEffect(async () =>{
         // get the post
         let post_ = await getPost(postId);
         setPost(post_);
@@ -21,7 +21,20 @@ const PostDetail = () => {
         if(post !== {}) {
             setLoaded(true)
         }
-    },[])
+    },[]) */
+    useEffect(() => {
+        const fetchData = async () => {
+          // get the post
+          const post_ = await getPost(postId);
+          setPost(post_);
+          setComments(post_.comments);
+          if (post_ !== {}) {
+            setLoaded(true);
+          }
+        };
+    
+        fetchData();
+      }, [postId]);
 
     // like the specific post
     // on click of like btn handleLike props is called and it will call this function

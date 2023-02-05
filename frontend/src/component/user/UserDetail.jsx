@@ -19,20 +19,21 @@ const UserDetail = () => {
     let currentUserId = user.data.user.id;
 
     
-    useEffect(() => {
-        if (parseInt(userId) === currentUserId) {
-          navigate('/profile');
+    useEffect(()=>{
+        // if user detail id == current logged in user id  redirect to profile 
+        if(parseInt(userId)===currentUserId) {
+            return navigate('/profile')
         }
-        const fetchUser = async () => {
-          setLoading(true);
-          let response = await getUser(userId);
-          setPosts(response.posts);
-          setUserDetail(response.user);
-          setLoading(false);
-        };
+        // fetch the data of user detail
+        const fetchUser = async () =>{
+            setLoading(true);
+            let response = await getUser(userId);
+            setPosts(response.posts);
+            setUserDetail(response.user);
+            setLoading(false)
+        }
         fetchUser();
-      }, [userId, currentUserId, navigate]);
-      
+    },[userId, currentUserId, navigate])
 
     return (
         <section>

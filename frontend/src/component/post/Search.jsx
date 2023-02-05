@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState, useCallback} from 'react';
 import Navbar from '../Navbar';
 import Loader from '../Loader';
 import Post from './Post';
@@ -14,18 +14,22 @@ const Search = () => {
     const [users,setUsers] = useState([]);
     const [loading,setLoading] = useState(false);
 
-    const handleSearch = async (post,user) => {
-        if(searchQuery) {
+    const handleSearch = useCallback(
+        async (post, user) => {
+          if (searchQuery) {
             setLoading(true);
-            const response = await searchResults(searchQuery,user);
-            if(response) {
-                response.posts ? setPosts(response.posts) : setPosts([])
-                response.users ? setUsers(response.users) : setUsers([])
-                console.log(response)
-                setLoading(false);
+            const response = await searchResults(searchQuery, user);
+            if (response) {
+              response.posts ? setPosts(response.posts) : setPosts([]);
+              response.users ? setUsers(response.users) : setUsers([]);
+              console.log(response);
+              setLoading(false);
             }
-        }
-    }
+          }
+        },
+        [searchQuery]
+      );
+      
 
     let formik = useFormik({
         initialValues:{
