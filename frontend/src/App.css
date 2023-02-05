@@ -477,3 +477,7 @@ border-radius: 20px;
   font-family: 'Source Sans Open', sans-serif !important;
   font-size: 16px !important;
 }
+
+#post__image {
+  color: #006400 !important;
+}

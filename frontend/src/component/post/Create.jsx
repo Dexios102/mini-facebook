@@ -52,7 +52,7 @@ const CreatePost = (props) => {
                 <textarea className="form-control" placeholder="Create Post" id="create__input" onChange={e => setCaption(e.target.value)} />
 
                 <label htmlFor="upload__image">
-                    <img src={UploadImage} alt="upload" style={{ height: "2em", width: "2em", marginLeft: "0.3em" }} />
+                    <img src={UploadImage} alt="upload" id="post__image" style={{ height: "2em", width: "2em", marginLeft: "0.3em" }} />
                 </label>
 
                 <input type="file" accept="image/*" id="upload__image" style={{ display: "none" }} onChange={handleImageUpload} />
