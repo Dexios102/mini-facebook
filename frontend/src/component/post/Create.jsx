@@ -74,7 +74,7 @@ const CreatePost = (props) => {
             }
 
             <button className="btn__primary" id="post__button" onClick={postData}>
-                {loading ? "Posting" : "POST"} <i className="fas fa-upload ms-1" id="post_icon"></i> </button>
+                {loading ? "Posting" : "Post"} </button>
         </div>
     )
 }

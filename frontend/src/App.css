@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700;900&display=swap');
 
 section  {
 background: #F5F5F5;
@@ -65,6 +66,7 @@ border-radius: 10px;
 }
 
 .create__post {
+  margin-top: 5px;
 width: 100%;
 display: flex;
 justify-content: space-between;
@@ -75,14 +77,14 @@ align-items: center;
 height:5px;
 width:84.5%;
 border:none;
-font-family:Ubuntu;
 font-weight:500;
+font-size: 14px;
 }
 
 #create__input::placeholder {
   color: rgb(117, 117, 117);
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .btn__primary {
@@ -101,10 +103,13 @@ background: #394dbe;
 width:100%;
 margin:0.9em auto;
 margin-bottom: 0;
+margin-top: 20px;
 background-color: #006400;
 font-family: 'Segoe UI', sans-serif;
 font-weight: bold;
 font-size: 15px;
+padding: 8px;
+border-radius: 20px;
 }
 
 #post_icon {
@@ -139,7 +144,7 @@ font-size: 15px;
   padding: 15px;
   font-size: 17px;
   font-weight: bold;
-  font-family: 'Segoe UI',  sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 #avatar {
@@ -149,7 +154,7 @@ font-size: 15px;
   margin-top: 0px !important;
   padding: 10px;
   font-size: 18px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .post__action {
@@ -240,4 +245,12 @@ font-size: 15px;
   padding: 10px;
   margin-bottom: -5px;
   color: #8c8c8c;
+}
+
+#post_heart {
+  color: red !important;
+}
+
+#post_comment {
+  color: #006400 !important;
 }

@@ -41,11 +41,11 @@ const Post = (props) => {
             <div className="post__action">
                 <span onClick={likePost}>
                     <i
-                        className={liked ? "fas fa-heart text-primary" : "far fa-heart text-primary"} />  {totalLikes}
+                        className={liked ? "fas fa-heart text-primary" : "far fa-heart text-primary"} id="post_heart" />  {totalLikes}
                 </span>
 
                 <Link to={"/post/" + props.id} className="ms-4">
-                    <i className="far fa-comment text-success" />
+                    <i className="far fa-comment text-success" id="post_comment" />
                 </Link>
                 {/* show edit btn if showEditBtn is true*/}
                 {
